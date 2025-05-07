@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Carte du Monde</title>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1 id="titre">Carte de nos voyages</h1>
+    <div class="container">
+      <div class="column1">
+        <div id="map"></div>
+      </div>
+      <div class="column2">
+        <h3>Ajouter un nouveau lit</h3>
+        <form id="placeForm" enctype="multipart/form-data">
+          <label for="name">Nom du lieu :</label>
+          <input type="text" id="name" name="name" required />
+
+          <label for="address">Rechercher une adresse :</label>
+          <div class="address-container">
+            <input 
+              type="text" 
+              id="address" 
+              name="address" 
+              placeholder="Entrez une adresse..."
+              autocomplete="off"
+            />
+            <div id="suggestions" class="suggestions-container"></div>
+          </div>
+
+
+          <label for="date">Date :</label>
+          <input type="date" id="date" name="date" required />
+
+          <input
+            type="file"
+            id="imageUpload"
+            name="image"
+            accept="image/*"
+            style="display: none"
+          />
+          <label for="imageUpload" class="upload-button">Choisir une image</label>
+          <img id="preview" src="#" alt="" class="image-preview" />
+
+
+          <button type="submit">Envoyer</button>
+        </form>
+        <div id="compteur">
+
+        </div>
+      </div>
+    </div>
+    <div id="responseMessage"></div>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>
