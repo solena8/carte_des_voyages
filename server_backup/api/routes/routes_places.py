@@ -1,9 +1,9 @@
 from fastapi import APIRouter
 from sqlalchemy.orm import Session
-from functions.services.service_places import create_new_place
-from functions.schemas import schema_places as schemas
-from functions.dependencies import get_db
-from functions.models.model_places import ModelPlace
+from server_backup.services.service_places import create_new_place
+from server_backup.schemas import schema_places as schemas
+from server_backup.dependencies import get_db
+from server_backup.models.model_places import ModelPlace
 from fastapi import Depends, status, HTTPException
 
 router = APIRouter()  # permet de structurer le projet en plusieurs fichiers et séparer les fonctionnalités :

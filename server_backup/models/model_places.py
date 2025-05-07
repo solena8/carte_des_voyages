@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String, DateTime, Float, LargeBinary
 from datetime import datetime
-from functions.database import Base
+from server_backup.database import Base
 
 
 class ModelPlace(Base):

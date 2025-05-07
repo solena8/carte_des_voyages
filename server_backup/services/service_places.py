@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
-from functions.models.model_places import ModelPlace
-from functions.schemas.schema_places import SchemaPlaceCreate
+from server_backup.models.model_places import ModelPlace
+from server_backup.schemas.schema_places import SchemaPlaceCreate
 
 def create_new_place(db: Session, place: SchemaPlaceCreate):
     db_place = ModelPlace(
