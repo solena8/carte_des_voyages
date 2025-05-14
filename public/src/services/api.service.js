@@ -4,7 +4,7 @@ import { MapService } from "./map.service.js";
 export class ApiService {
   static async loadPlaces(map) {
     try {
-      const response = await fetch(`${API_CONFIG.MAIN.URL}/places/`);
+      const response = await fetch("https://list-gpyb7z23pq-uc.a.run.app");
       if (!response.ok)
         throw new Error(`HTTP error! status: ${response.status}`);
 
@@ -33,7 +33,7 @@ export class ApiService {
 
   static async submitPlace(data) {
     try {
-      const response = await fetch(`${API_CONFIG.MAIN.URL}/places/`, {
+      const response = await fetch("https://create-gpyb7z23pq-uc.a.run.app", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
@@ -45,6 +45,7 @@ export class ApiService {
     }
   }
 
+  /*
   static async deletePlace(id) {
     try {
       const response = await fetch(`${API_CONFIG.MAIN.URL}/places/${id}`, {
@@ -61,6 +62,7 @@ export class ApiService {
     }
   }
 
+  
   static async getStats() {
     try {
       const response = await fetch(`${API_CONFIG.MAIN.URL}/places/api/stats`);
@@ -81,10 +83,13 @@ async function updateStats() {
   document.getElementById(
     "compteur"
   ).innerText = `Nb de pays visités : ${result.uniqueCountries} \nNb de lits visités : ${result.totalEntries}`;
+  */
 }
 
+/*
 document.addEventListener("DOMContentLoaded", async () => {
   await updateStats();
 });
 
 window.updateStats = updateStats;
+*/
