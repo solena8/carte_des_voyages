@@ -6,8 +6,30 @@ from firebase_admin import initialize_app
 from firebase_functions import https_fn, options
 from firedantic import configure
 from google.cloud.firestore import Client
+from typing import List
 
-from models import Place, PlaceList
+from pydantic import RootModel
+from firedantic import Model
+from datetime import datetime
+
+
+# from models import Place, PlaceList
+
+class Place(Model):
+    __collection__ = "places"
+    # id: str
+    name: str
+    date: datetime
+    city: str
+    country: str
+    latitude: float
+    longitude: float
+    # image = Column(LargeBinary)
+
+
+class PlaceList(RootModel):
+    root: List[Place]
+
 
 app = initialize_app()
 
@@ -45,7 +67,6 @@ def create(req: https_fn.Request) -> https_fn.Response:
     place.save()
     print(place)
     return https_fn.Response(place.model_dump_json(), content_type="application/json")
-
 
 
 @https_fn.on_request(cors=options.CorsOptions(cors_origins="*", cors_methods=["get"]))
