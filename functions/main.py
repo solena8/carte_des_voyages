@@ -39,7 +39,7 @@ def create_fake(req: https_fn.Request) -> https_fn.Response:
     return https_fn.Response(f"New with ID {place.id} added.")
 
 
-@https_fn.on_request(cors=options.CorsOptions(cors_origins="*", cors_methods=["get", "post"]))
+@https_fn.on_request(cors=options.CorsOptions(cors_origins="*", cors_methods=["post"]))
 def create(req: https_fn.Request) -> https_fn.Response:
     place = Place.model_validate_json(req.data)
     place.save()
@@ -47,10 +47,10 @@ def create(req: https_fn.Request) -> https_fn.Response:
     return https_fn.Response(place.model_dump_json(), content_type="application/json")
 
 
-@https_fn.on_request()
+
+@https_fn.on_request(cors=options.CorsOptions(cors_origins="*", cors_methods=["get"]))
 def list(req: https_fn.Request) -> https_fn.Response:
     """List all places in the database."""
-    # Get all places from the database
     places = PlaceList(root=Place.find())
     print(len(places.root))
 

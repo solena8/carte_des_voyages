@@ -24,16 +24,15 @@
 
           <label for="address">Rechercher une adresse :</label>
           <div class="address-container">
-            <input 
-              type="text" 
-              id="address" 
-              name="address" 
+            <input
+              type="text"
+              id="address"
+              name="address"
               placeholder="Entrez une adresse..."
               autocomplete="off"
             />
             <div id="suggestions" class="suggestions-container"></div>
           </div>
-
 
           <label for="date">Date :</label>
           <input type="date" id="date" name="date" required />
@@ -45,15 +44,14 @@
             accept="image/*"
             style="display: none"
           />
-          <label for="imageUpload" class="upload-button">Choisir une image</label>
+          <label for="imageUpload" class="upload-button"
+            >Choisir une image</label
+          >
           <img id="preview" src="#" alt="" class="image-preview" />
-
 
           <button type="submit">Envoyer</button>
         </form>
-        <div id="compteur">
-
-        </div>
+        <div id="compteur"></div>
       </div>
     </div>
     <div id="responseMessage"></div>
