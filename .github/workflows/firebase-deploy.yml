@@ -1,0 +1,33 @@
+name: Deploy Firebase Functions  # Nom du workflow visible sur GitHub
+
+# Ce workflow s'exécute à chaque push sur la branche main
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest  # système Linux pour exécuter les commandes
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3  # récupère le code de ton repo
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18  # version de Node compatible Firebase Functions
+
+      - name: Install dependencies
+        run: npm install
+        working-directory: ./functions  # installe les dépendances dans le dossier functions
+
+      - name: Install Firebase CLI
+        run: npm install -g firebase-tools  # installe l'outil CLI Firebase globalement
+
+      - name: Deploy to Firebase
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}  # token Firebase stocké dans GitHub Secrets
+        run: |
+          firebase deploy --only functions --token $FIREBASE_TOKEN
