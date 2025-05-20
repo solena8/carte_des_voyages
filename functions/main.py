@@ -11,7 +11,7 @@ from typing import List
 from pydantic import RootModel
 from firedantic import Model
 from datetime import datetime
-
+import json
 
 # from models import Place, PlaceList
 
@@ -47,7 +47,6 @@ configure(client)
 
 @https_fn.on_request()
 def create_fake(req: https_fn.Request) -> https_fn.Response:
-    # Now you can use the model to save it to Firestore
     place = Place(
         name="My Place",
         date='2032-04-23T10:20:30.400+02:30',
@@ -71,8 +70,38 @@ def create(req: https_fn.Request) -> https_fn.Response:
 
 @https_fn.on_request(cors=options.CorsOptions(cors_origins="*", cors_methods=["get"]))
 def list(req: https_fn.Request) -> https_fn.Response:
-    """List all places in the database."""
     places = PlaceList(root=Place.find())
     print(len(places.root))
 
     return https_fn.Response(places.model_dump_json(), content_type="application/json")
+
+@https_fn.on_request(cors=options.CorsOptions(cors_origins="*", cors_methods=["delete"]))
+def delete(req: https_fn.Request) -> https_fn.Response:
+    place_id = req.args.get("id")
+
+    if not place_id:
+        return https_fn.Response("Missing id in query params", status=400)
+
+    place = Place.get_by_id(place_id)
+    if place:
+        place.delete()
+        return https_fn.Response(place.model_dump_json(), content_type="application/json")
+    else:
+        return https_fn.Response(f"No place found with id {place_id}", status=404)
+
+@https_fn.on_request(cors=options.CorsOptions(cors_origins="*", cors_methods=["get"]))
+def stats(req: https_fn.Request) -> https_fn.Response:
+    all_places = Place.find()
+    total_entries = len(all_places)
+
+    total_countries = {place.country for place in all_places}
+    unique_countries = len(total_countries)
+
+    stats_data = {
+        "totalEntries": total_entries,
+        "uniqueCountries": unique_countries,
+    }
+    return https_fn.Response(
+        json.dumps(stats_data),
+        content_type="application/json"
+    )
