@@ -2,10 +2,13 @@ import { API_KEY } from './apiKey.js';
 
 export const API_CONFIG = {
     MAIN:{
-        URL: 'http://127.0.0.1:5001/carte-des-voyages-tug-solena/us-central1'
+        STATS: 'https://stats-gpyb7z23pq-uc.a.run.app ',
+        LIST: 'https://list-gpyb7z23pq-uc.a.run.app',
+        CREATE: 'https://create-gpyb7z23pq-uc.a.run.app',
+        DELETE: 'https://delete-gpyb7z23pq-uc.a.run.app',
     },
     POSITIONSTACK: {
       apiKey: API_KEY,
-      baseUrl: 'http://api.positionstack.com/v1'
+      baseUrl: 'https://api.positionstack.com/v1'
     }
   };

@@ -4,8 +4,8 @@ import {MapService} from "./map.service.js";
 export class ApiService {
     static async loadPlaces(map) {
         try {
-            console.log("Fetching places from:", `${API_CONFIG.MAIN.URL}/list`);
-            const response = await fetch(`${API_CONFIG.MAIN.URL}/list`);
+            console.log("Fetching places from:", `${API_CONFIG.MAIN.LIST}`);
+            const response = await fetch(`${API_CONFIG.MAIN.LIST}`);
             if (!response.ok)
                 throw new Error(`HTTP error! status: ${response.status}`);
 
@@ -57,7 +57,7 @@ export class ApiService {
     static async submitPlace(formData) {
         try {
 
-            const response = await fetch(`${API_CONFIG.MAIN.URL}/create`, {
+            const response = await fetch(`${API_CONFIG.MAIN.CREATE}`, {
                 method: "POST",
                 body: formData,
             });
@@ -84,7 +84,7 @@ export class ApiService {
         try {
             console.log("Deleting place with ID:", id);
 
-            const response = await fetch(`${API_CONFIG.MAIN.URL}/delete?id=${id}`, {
+            const response = await fetch(`${API_CONFIG.MAIN.DELETE}?id=${id}`, {
                 method: "DELETE",
             });
 
@@ -100,7 +100,7 @@ export class ApiService {
 
     static async getStats() {
         try {
-            const response = await fetch(`${API_CONFIG.MAIN.URL}/stats`);
+            const response = await fetch(`${API_CONFIG.MAIN.STATS}`);
             if (!response.ok)
                 throw new Error("Error retrieving statistics");
 
