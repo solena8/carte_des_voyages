@@ -10,7 +10,7 @@ export class ApiService {
                 throw new Error(`HTTP error! status: ${response.status}`);
 
             const data = await response.json();
-            console.log("API response data:", data); // Debug the response
+            console.log("API response data:", data);
 
             if (!Array.isArray(data) || data.length === 0) {
                 console.log("No places data found or empty array");
@@ -19,7 +19,7 @@ export class ApiService {
 
             const markers = [];
             data.forEach((place) => {
-                console.log("Processing place:", place); // Debug each place object
+                console.log("Processing place:", place);
 
                 try {
                     place.date = new Date(place.date).toLocaleDateString();
@@ -114,7 +114,6 @@ export class ApiService {
     }
 }
 
-// Update stats in the DOM
 async function updateStats() {
     const result = await ApiService.getStats();
 

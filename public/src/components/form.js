@@ -19,18 +19,14 @@ export class FormHandler {
             return;
         }
 
-        const imageFile = document.getElementById("imageUpload").files[0];
-        console.log("Image file selected:", imageFile);
+        // const imageFile = document.getElementById("imageUpload").files[0];
+        // console.log("Image file selected:", imageFile);
 
-        if (!imageFile) {
-            alert("Veuillez sélectionner une image");
-            return;
-        }
+        // if (!imageFile) {
+        //     alert("Veuillez sélectionner une image");
+        //     return;
+        // }
 
-        if (!imageFile) {
-            alert("Veuillez sélectionner une image");
-            return;
-        }
 
         const data = this.collectFormData();
 
@@ -41,10 +37,9 @@ export class FormHandler {
         formData.append("country", data.country);
         formData.append("latitude", data.latitude.toString());
         formData.append("longitude", data.longitude.toString());
-        formData.append("imageUpload", imageFile);
+        // formData.append("imageUpload", imageFile);
 
         try {
-            console.log("Image file:", imageFile);
             const result = await ApiService.submitPlace(formData);
             console.log(formData)
             this.showSuccessMessage(result);

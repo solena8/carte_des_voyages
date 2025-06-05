@@ -26,7 +26,7 @@ class Place(Model):
     country: str
     latitude: float
     longitude: float
-    image_url: str
+    # image_url: str
 
 
 class PlaceList(RootModel):
@@ -68,24 +68,24 @@ def create(req: https_fn.Request) -> https_fn.Response:
         return https_fn.Response("", status=200)
 
     form = req.form
-    file = req.files.get("image")
-
-    if not file:
-        print("No file received in request.files")
-        print("Available files:", list(req.files.keys()))
-        print("Form data:", dict(form))
-        return https_fn.Response("Image is required", status=400)
+    # file = req.files.get("image")
+    #
+    # if not file:
+    #     print("No file received in request.files")
+    #     print("Available files:", list(req.files.keys()))
+    #     print("Form data:", dict(form))
+    #     return https_fn.Response("Image is required", status=400)
 
     # Upload de l'image dans Firebase Storage
-    bucket_name = "carte-des-voyages-tug-solena.appspot.com"
-    client = storage.Client()
-    bucket = client.bucket(bucket_name)
-
-    unique_name = f"{uuid.uuid4()}.jpg"
-    blob = bucket.blob(f"places/{unique_name}")
-    blob.upload_from_string(file.read(), content_type=file.content_type)
-    blob.make_public()
-    image_url = blob.public_url
+    # bucket_name = "carte-des-voyages-tug-solena.appspot.com"
+    # client = storage.Client()
+    # bucket = client.bucket(bucket_name)
+    #
+    # unique_name = f"{uuid.uuid4()}.jpg"
+    # blob = bucket.blob(f"places/{unique_name}")
+    # blob.upload_from_string(file.read(), content_type=file.content_type)
+    # blob.make_public()
+    # image_url = blob.public_url
 
     place = Place(
         name=form["name"],
@@ -94,7 +94,7 @@ def create(req: https_fn.Request) -> https_fn.Response:
         country=form["country"],
         latitude=float(form["latitude"]),
         longitude=float(form["longitude"]),
-        image_url=image_url,
+        # image_url=image_url,
     )
     place.save()
     return https_fn.Response(place.model_dump_json(), content_type="application/json")
