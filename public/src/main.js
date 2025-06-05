@@ -2,7 +2,7 @@ import { MapService } from "./services/map.service.js";
 import { ApiService } from "./services/api.service.js";
 import { FormHandler } from "./components/form.js";
 import { ImageService } from "./services/image.service.js";
-//import { GeocodingService } from "./services/geocoding.service.js";
+import { GeocodingService } from "./services/geocoding.service.js";
 
 window.handlePlaceDelete = async (id) => {
   if (!confirm("Êtes-vous sûr de vouloir supprimer ce lieu ?")) {
@@ -22,7 +22,7 @@ window.handlePlaceDelete = async (id) => {
 function initializeApp() {
   const map = MapService.initializeMap();
   ImageService.initializeImageUpload();
-  //GeocodingService.initializeAddressSearch();
+  GeocodingService.initializeAddressSearch();
   FormHandler.initializeFormSubmission(map);
   ApiService.loadPlaces(map);
 }
